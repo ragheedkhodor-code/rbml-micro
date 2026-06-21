@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RBML Food Labs — Food &amp; Water Safety Testing, Lebanon</title>
+<meta name="description" content="RBML is an ISO/IEC 17025:2017 accredited food, water, cannabis and cosmetics testing laboratory in Choueifat, Lebanon.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F8F8F8;
+    --paper-2:#F0F0F0;
+    --ink:#1A1A1A;
+    --teal:#C2342A;
+    --teal-deep:#9B1B13;
+    --teal-tint:#FBE9E7;
+    --red:#C2342A;
+    --red-tint:#FBE9E7;
+    --line:#E0DADA;
+    --gray:#5C5555;
+    --gray-2:#8A7F7F;
+    --display: 'Space Grotesk', sans-serif;
+    --body: 'Inter', sans-serif;
+    --mono: 'IBM Plex Mono', monospace;
+    --max:1180px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.001ms !important; transition-duration:0.001ms !important;}
+  }
+  body{
+    margin:0;
+    font-family:var(--body);
+    color:var(--ink);
+    background:var(--paper);
+    -webkit-font-smoothing:antialiased;
+  }
+  img{max-width:100%;display:block;}
+  a{color:inherit;}
+  .wrap{max-width:var(--max); margin:0 auto; padding:0 28px;}
+  h1,h2,h3,h4{font-family:var(--display); margin:0; letter-spacing:-0.01em;}
+  p{line-height:1.6; color:var(--gray); margin:0;}
+  .eyebrow{
+    font-family:var(--mono); font-size:12px; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--teal-deep); display:flex; align-items:center; gap:10px; font-weight:600;
+  }
+  .eyebrow::before{content:""; width:7px; height:7px; border-radius:50%; background:var(--red); flex:none;}
+  .btn{
+    font-family:var(--mono); font-size:13px; letter-spacing:.04em; text-transform:uppercase;
+    font-weight:600; padding:13px 22px; border-radius:3px; border:1.5px solid var(--ink);
+    background:transparent; color:var(--ink); cursor:pointer; display:inline-flex; align-items:center; gap:8px;
+    text-decoration:none; transition:background .18s ease, color .18s ease, border-color .18s ease;
+  }
+  .btn-solid{background:var(--red); color:#fff; border-color:var(--red);}
+  .btn-solid:hover{background:var(--teal-deep); border-color:var(--teal-deep);}
+  .btn:not(.btn-solid):hover{background:var(--ink); color:#fff;}
+
+  /* ===== Header ===== */
+  header{
+    background:rgba(250,250,246,.92);
+    border-bottom:1px solid var(--line);
+  }
+  .topbar{display:flex; justify-content:space-between; align-items:center; font-family:var(--mono); font-size:11.5px; color:var(--gray); padding:7px 0; border-bottom:1px solid var(--line); letter-spacing:.02em;}
+  .topbar a{text-decoration:none;}
+  .topbar a:hover{color:var(--teal-deep);}
+  .topbar .tb-right{display:flex; gap:18px;}
+  nav.main{display:flex; align-items:center; justify-content:space-between; padding:0;}
+  .logo{display:flex; align-items:center; text-decoration:none;}
+  .logo-img{height:130px; width:auto; display:block;}
+  .logo-mark{display:none;}
+  .logo-text{display:none;}
+  .navlinks{display:flex; gap:30px; font-size:14.5px; font-weight:500;}
+  .navlinks a{text-decoration:none; color:var(--ink); position:relative; padding:4px 0;}
+  .navlinks a::after{content:""; position:absolute; left:0; bottom:-2px; width:0; height:2px; background:var(--red); transition:width .2s ease;}
+  .navlinks a:hover::after{width:100%;}
+  .nav-actions{display:flex; align-items:center; gap:14px;}
+  .burger{display:none; background:none; border:none; cursor:pointer;}
+  @media (max-width:900px){
+    .navlinks{display:none;}
+    .nav-actions .btn{display:none;}
+    .burger{display:block;}
+  }
+
+  /* ===== Hero photo stack ===== */
+  .hero-photo-stack{position:relative; display:inline-block; width:100%;}
+  .hero-photo{width:100%; height:380px; object-fit:cover; border-radius:8px; box-shadow:0 30px 60px -20px rgba(0,0,0,.35);}
+
+  /* ===== Photo banner ===== */
+  .photo-banner{display:grid; grid-template-columns:repeat(4,1fr); gap:0; height:280px; overflow:hidden;}
+  .photo-banner-label{position:relative; overflow:hidden;}
+  .photo-banner img{width:100%; height:100%; object-fit:cover; object-position:center; display:block; filter:brightness(.82); transition:filter .4s ease, transform .4s ease;}
+  .photo-banner-label:hover img{filter:brightness(1); transform:scale(1.04);}
+
+  /* ===== About photo ===== */
+  .about-photo{width:100%; height:320px; object-fit:cover; border-radius:6px; margin-bottom:24px; box-shadow:0 20px 40px -15px rgba(0,0,0,.5);}
+
+  /* ===== Hero ===== */
+  .hero{position:relative; padding:48px 0 40px; overflow:hidden; border-bottom:1px solid var(--line);}
+  .hero-grid{
+    position:absolute; inset:0; opacity:.5;
+    background-image:
+      radial-gradient(circle at 1px 1px, var(--line) 1px, transparent 1.6px);
+    background-size:26px 26px;
+    mask-image: linear-gradient(to bottom, transparent, black 18%, black 75%, transparent);
+  }
+  .hero-inner{position:relative; display:grid; grid-template-columns:1.15fr .85fr; gap:60px; align-items:center;}
+  @media (max-width:900px){.hero-inner{grid-template-columns:1fr;}}
+  .hero h1{font-size:clamp(34px,4.6vw,58px); line-height:1.04; margin:18px 0 20px; font-weight:700;}
+  .hero h1 em{font-style:normal; color:var(--teal-deep); text-decoration:underline; text-decoration-color:var(--red); text-decoration-thickness:3px; text-underline-offset:6px;}
+  .hero p.lead{font-size:17px; max-width:480px; margin-bottom:30px;}
+  .hero-actions{display:flex; gap:14px; flex-wrap:wrap; margin-bottom:34px;}
+  .hero-meta{display:flex; gap:28px; flex-wrap:wrap; font-family:var(--mono); font-size:12px; color:var(--gray);}
+  .hero-meta div{display:flex; flex-direction:column; gap:3px;}
+  .hero-meta b{color:var(--ink); font-size:14px; font-weight:600;}
+
+  /* Sample label card — signature element */
+  .label-card{
+    background:var(--ink); color:var(--paper); border-radius:6px; padding:26px 26px 22px;
+    font-family:var(--mono); position:relative; box-shadow:0 24px 50px -20px rgba(10,30,28,.5);
+    transform:rotate(1.2deg);
+  }
+  .label-card::before{
+    content:""; position:absolute; top:14px; right:14px; width:54px; height:54px; border-radius:50%;
+    border:2px solid var(--red); display:block;
+  }
+  .label-stamp{position:absolute; top:30px; right:25px; width:42px; height:42px; transform:rotate(8deg);}
+  .label-top{display:flex; justify-content:space-between; font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:#9FC9C5; border-bottom:1px solid #2C4A47; padding-bottom:12px;}
+  .label-title{font-family:var(--display); font-size:20px; font-weight:700; color:#fff; margin:16px 0 4px; max-width:180px;}
+  .label-row{display:flex; justify-content:space-between; font-size:11.5px; padding:8px 0; border-bottom:1px solid #233C39; color:#BFD9D6;}
+  .label-row b{color:#fff; font-weight:600;}
+  .label-foot{margin-top:14px; display:flex; justify-content:space-between; align-items:center;}
+  .pill{font-size:10px; letter-spacing:.08em; text-transform:uppercase; background:var(--red); color:#fff; padding:5px 10px; border-radius:20px; font-weight:600;}
+  .barcode{display:flex; gap:2px; align-items:flex-end; height:20px;}
+  .barcode span{display:block; width:2px; background:#5B7E7A;}
+
+  /* ===== Trust strip ===== */
+  .trust{border-bottom:1px solid var(--line); background:var(--paper-2);}
+  .trust-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:0;}
+  @media (max-width:900px){.trust-grid{grid-template-columns:repeat(2,1fr);}}
+  .trust-item{padding:26px 28px; border-right:1px solid var(--line); display:flex; gap:14px; align-items:flex-start;}
+  .trust-item:last-child{border-right:none;}
+  @media (max-width:900px){.trust-item:nth-child(2n){border-right:none;} .trust-item{border-bottom:1px solid var(--line);}}
+  .trust-icon{flex:none; width:34px; height:34px; color:var(--teal-deep);}
+  .trust-item h4{font-size:14.5px; font-weight:600; margin-bottom:4px;}
+  .trust-item p{font-size:13px;}
+
+  /* ===== Section generic ===== */
+  section{padding:52px 0;}
+  .section-head{max-width:680px; margin-bottom:30px;}
+  .section-head h2{font-size:clamp(24px,3.2vw,36px); margin:10px 0 10px; font-weight:700;}
+  .section-head p{font-size:15px;}
+
+  /* ===== Services overview grid ===== */
+  .svc-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--line); border:1px solid var(--line);}
+  @media (max-width:900px){.svc-grid{grid-template-columns:repeat(2,1fr);}}
+  @media (max-width:560px){.svc-grid{grid-template-columns:1fr;}}
+  .svc-card{background:var(--paper); padding:28px 24px; text-decoration:none; color:var(--ink); display:flex; flex-direction:column; gap:14px; transition:background .2s ease;}
+  .svc-card:hover{background:var(--teal-tint);}
+  .svc-num{font-family:var(--mono); font-size:11px; color:var(--gray-2); letter-spacing:.08em;}
+  .svc-icon{width:30px; height:30px; color:var(--red);}
+  .svc-card h3{font-size:16px; font-weight:600;}
+  .svc-card p{font-size:13px;}
+  .svc-go{font-family:var(--mono); font-size:11px; text-transform:uppercase; letter-spacing:.06em; color:var(--teal-deep); margin-top:auto; font-weight:600;}
+
+  /* ===== Panel rail layout ===== */
+  .panels-shell{display:grid; grid-template-columns:230px 1fr; gap:50px; align-items:start;}
+  @media (max-width:880px){.panels-shell{grid-template-columns:1fr;}}
+  .rail{position:sticky; top:96px; display:flex; flex-direction:column; gap:2px;}
+  @media (max-width:880px){
+    .rail{position:static; flex-direction:row; overflow-x:auto; gap:8px; padding-bottom:10px; top:auto; -webkit-overflow-scrolling:touch;}
+  }
+  .rail a{
+    font-family:var(--mono); font-size:12px; padding:10px 12px; text-decoration:none; color:var(--gray);
+    border-left:2px solid var(--line); display:flex; gap:10px; white-space:nowrap; transition:.15s ease;
+  }
+  @media (max-width:880px){.rail a{border-left:none; border-bottom:2px solid var(--line); background:var(--paper-2); border-radius:3px;}}
+  .rail a b{color:var(--gray-2); font-weight:600;}
+  .rail a.active, .rail a:hover{color:var(--ink); border-left-color:var(--red); background:var(--teal-tint);}
+  .rail a.active b, .rail a:hover b{color:var(--red);}
+
+  .panel{padding:20px 0 36px; border-bottom:1px solid var(--line); scroll-margin-top:90px; display:none;}
+  .panel.active{display:block;}
+  .panel:last-child{border-bottom:none;}
+  .panels-content{min-height:320px;}
+  .panel-head{display:flex; gap:18px; align-items:flex-start; margin-bottom:16px; flex-wrap:wrap;}
+  .panel-id{font-family:var(--mono); font-size:13px; color:var(--red); font-weight:600; letter-spacing:.05em; padding-top:6px;}
+  .panel-head h3{font-size:25px; font-weight:700;}
+  .panel-scope{font-size:14.5px; max-width:680px; margin:10px 0 22px;}
+  .panel-status{font-family:var(--mono); font-size:10.5px; text-transform:uppercase; letter-spacing:.06em; background:var(--teal-tint); color:var(--teal-deep); padding:5px 10px; border-radius:3px; font-weight:600; margin-left:auto; flex:none;}
+  .panel-status.soon{background:var(--red-tint); color:var(--red);}
+
+  .groups{display:grid; grid-template-columns:repeat(2,1fr); gap:26px;}
+  @media (max-width:700px){.groups{grid-template-columns:1fr;}}
+  .group h4{font-family:var(--mono); font-size:11.5px; text-transform:uppercase; letter-spacing:.07em; color:var(--gray-2); margin-bottom:10px; font-weight:600;}
+  .chips{display:flex; flex-wrap:wrap; gap:7px;}
+  .chip{font-size:12.8px; border:1px solid var(--line); padding:6px 11px; border-radius:20px; color:var(--ink); background:var(--paper-2);}
+
+  /* ===== About / accreditation ===== */
+  .about-band{background:#1A1A1A; color:#EAF4F2;}
+  .about-band .eyebrow{color:#E08080;}
+  .about-band .eyebrow::before{background:var(--red);}
+  .about-grid{display:grid; grid-template-columns:1.05fr .95fr; gap:60px; align-items:start;}
+  @media (max-width:900px){.about-grid{grid-template-columns:1fr;}}
+  .about-grid h2{color:#fff;}
+  .about-grid p{color:#BFDAD6;}
+  .accred-list{display:flex; flex-direction:column; gap:0; margin-top:24px;}
+  .accred-list div{display:flex; justify-content:space-between; padding:14px 0; border-bottom:1px solid #333; font-size:14px;}
+  .accred-list b{font-weight:600; color:#fff;}
+  .accred-list span{font-family:var(--mono); font-size:12px; color:#E08080;}
+
+  .industries{display:grid; grid-template-columns:1fr 1fr; gap:30px;}
+  .industries h4{font-family:var(--mono); font-size:11.5px; text-transform:uppercase; letter-spacing:.07em; color:#E08080; margin-bottom:12px; font-weight:600;}
+  .industries ul{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:9px;}
+  .industries li{font-size:13.8px; color:#D0D0D0; display:flex; gap:9px;}
+  .industries li::before{content:"—"; color:#C2342A; flex:none;}
+
+  /* ===== Stats ===== */
+  .stats{border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
+  .stats-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:0;}
+  @media (max-width:700px){.stats-grid{grid-template-columns:1fr; gap:0;}}
+  .stats-grid > div{padding:22px 28px; border-right:1px solid var(--line); display:flex; flex-direction:column; gap:4px;}
+  .stats-grid > div:last-child{border-right:none;}
+  @media (max-width:700px){.stats-grid > div{border-right:none; border-bottom:1px solid var(--line);}}
+  .stats-grid b{font-family:var(--display); font-size:30px; color:var(--red);}
+  .stats-grid span{font-family:var(--mono); font-size:12px; color:var(--gray); text-transform:uppercase; letter-spacing:.05em;}
+
+  /* ===== Contact ===== */
+  .contact-grid{display:grid; grid-template-columns:.9fr 1.1fr; gap:60px;}
+  @media (max-width:900px){.contact-grid{grid-template-columns:1fr;}}
+  .contact-info{display:flex; flex-direction:column; gap:22px;}
+  .ci-item{display:flex; gap:14px; align-items:flex-start;}
+  .ci-item .ic{flex:none; width:34px; height:34px; color:var(--red);}
+  .ci-item h4{font-size:14px; font-weight:600; margin-bottom:3px;}
+  .ci-item p, .ci-item a{font-size:14px; text-decoration:none;}
+  .ci-item a:hover{color:var(--teal-deep);}
+  form{display:flex; flex-direction:column; gap:16px;}
+  .form-row{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
+  @media (max-width:560px){.form-row{grid-template-columns:1fr;}}
+  label{font-family:var(--mono); font-size:11px; text-transform:uppercase; letter-spacing:.06em; color:var(--gray); margin-bottom:6px; display:block;}
+  input, select, textarea{
+    width:100%; border:1px solid var(--line); background:var(--paper-2); padding:12px 13px; font-family:var(--body);
+    font-size:14px; border-radius:3px; color:var(--ink);
+  }
+  input:focus, select:focus, textarea:focus{outline:2px solid var(--teal); outline-offset:1px; background:#fff;}
+  textarea{resize:vertical; min-height:110px;}
+
+  footer{background:var(--ink); color:#9FB4B0; padding:50px 0 26px;}
+  .footer-grid{display:flex; justify-content:space-between; flex-wrap:wrap; gap:40px; padding-bottom:34px; border-bottom:1px solid #233C39;}
+  .footer-grid .logo-text{color:#fff;}
+  .footer-grid .logo-mark{border-color:#3F8C86;}
+  .flinks{display:flex; gap:50px; flex-wrap:wrap;}
+  .flinks div{display:flex; flex-direction:column; gap:9px;}
+  .flinks h5{font-family:var(--mono); font-size:11px; text-transform:uppercase; letter-spacing:.07em; color:#5B7E7A; margin:0 0 4px;}
+  .flinks a{font-size:13.5px; text-decoration:none; color:#C7DAD7;}
+  .flinks a:hover{color:#fff;}
+  .fbottom{display:flex; justify-content:space-between; padding-top:22px; font-size:12px; font-family:var(--mono); color:#5B7E7A; flex-wrap:wrap; gap:10px;}
+
+  .mini-footer{background:#1A1A1A; color:#888; padding:16px 0; font-family:var(--mono); font-size:11.5px; letter-spacing:.03em;}
+
+  .fade-in{opacity:0; transform:translateY(14px); transition:opacity .6s ease, transform .6s ease;}
+  .fade-in.in{opacity:1; transform:translateY(0);}
+
+  .skip-link{position:absolute; left:-999px; top:0;}
+  .skip-link:focus{left:10px; top:10px; background:var(--ink); color:#fff; padding:8px 14px; z-index:100; border-radius:3px;}
+</style>
+</head>
+<body>
+
+<a href="#main" class="skip-link">Skip to content</a>
+
+<header>
+  <div class="topbar">
+    <div class="wrap" style="display:flex; justify-content:space-between; width:100%;">
+      <span>Choueifat, Lebanon — Old Saida Road, A. Khalek Bldg, 4th Floor</span>
+      <div class="tb-right">
+        <a href="tel:+9615433149">+961 5 433149</a>
+        <a href="mailto:ramikhodr@rbml-micro.com">ramikhodr@rbml-micro.com</a>
+      </div>
+    </div>
+  </div>
+  <div class="wrap">
+    <nav class="main">
+      <a class="logo" href="#main">
+        <img src="rbml-logo.png" alt="RBML Food Labs" class="logo-img">
+      </a>
+      <div class="navlinks">
+        <a href="#services">Services</a>
+        <a href="#panels">Test Panels</a>
+        <a href="#about">Accreditation</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <div class="nav-actions">
+        <a class="btn btn-solid" href="#contact">Request a quote</a>
+      </div>
+      <button class="burger" aria-label="Open menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#142420" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- HERO -->
+  <section class="hero" style="padding-top:40px;">
+    <div class="hero-grid" aria-hidden="true"></div>
+    <div class="wrap hero-inner">
+      <div>
+        <span class="eyebrow">ISO/IEC 17025:2017 Accredited Laboratory</span>
+        <h1>Leading the way in <em>food &amp; water safety</em>.</h1>
+        <p class="lead">RBML is the first privately‑owned, accredited testing laboratory of its kind in Lebanon — helping food, beverage, water and cannabis businesses prove compliance with hard data, not guesswork.</p>
+        <div class="hero-actions">
+          <a class="btn btn-solid" href="#contact">Request a quote</a>
+          <a class="btn" href="#panels">View test panels ↓</a>
+        </div>
+        <div class="hero-meta">
+          <div><b>CYSAB L042‑3</b>ISO/IEC 17025:2017 scope</div>
+          <div><b>ILAC‑MRA</b>Internationally recognised</div>
+          <div><b>GAFTA</b>Analyst member</div>
+        </div>
+      </div>
+      <div class="fade-in" data-fade>
+        <div class="hero-photo-stack">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1200&q=90&fit=crop&crop=center" alt="Laboratory scientist working" class="hero-photo">
+          <div class="label-card" style="position:absolute; bottom:-20px; left:-20px; width:200px; padding:16px 18px;">
+            <div class="label-top" style="font-size:9px;"><span>Sample Report</span><span>RBML‑LAB</span></div>
+            <div class="label-title" style="font-size:14px; margin:10px 0 4px;">Certificate of Analysis</div>
+            <div class="label-row" style="font-size:10px; padding:5px 0;"><span>Standard</span><b>ISO/IEC 17025:2017</b></div>
+            <div class="label-foot" style="margin-top:10px;">
+              <span class="pill">Accredited</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST STRIP -->
+  <div class="trust">
+    <div class="wrap trust-grid">
+      <div class="trust-item fade-in" data-fade>
+        <svg class="trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"/></svg>
+        <div><h4>Accredited laboratory</h4><p>ISO/IEC 17025:2017, CYSAB &amp; ILAC‑MRA recognised.</p></div>
+      </div>
+      <div class="trust-item fade-in" data-fade>
+        <svg class="trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg>
+        <div><h4>Expert analysts</h4><p>Experienced chemists &amp; microbiologists across every panel.</p></div>
+      </div>
+      <div class="trust-item fade-in" data-fade>
+        <svg class="trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 12l4 4L20 4"/><path d="M4 19h16"/></svg>
+        <div><h4>Trusted by leading brands</h4><p>Producers, importers, hotels &amp; municipalities region‑wide.</p></div>
+      </div>
+      <div class="trust-item fade-in" data-fade>
+        <svg class="trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 6v6l4 2"/><circle cx="12" cy="12" r="9"/></svg>
+        <div><h4>Quick turnaround</h4><p>Cost‑effective testing without compromising on rigour.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHOTO BANNER -->
+  <div class="photo-banner">
+    <div class="photo-banner-label" data-label="Lab Microscopy">
+      <img src="https://images.unsplash.com/photo-1576671081837-49000212a370?w=1200&q=90&fit=crop&crop=center" alt="Lab microscopy">
+    </div>
+    <div class="photo-banner-label" data-label="Food Analysis">
+      <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=1200&q=90&fit=crop&crop=center" alt="Food analysis laboratory">
+    </div>
+    <div class="photo-banner-label" data-label="Chemical Analysis">
+      <img src="https://images.unsplash.com/photo-1603126857599-f6e157fa2fe6?w=1200&q=90&fit=crop&crop=center" alt="Chemical analysis">
+    </div>
+    <div class="photo-banner-label" data-label="Food Quality">
+      <img src="https://images.unsplash.com/photo-1518977676601-b53f82aba655?w=1200&q=90&fit=crop&crop=center" alt="Food quality management">
+    </div>
+  </div>
+
+  <!-- SERVICES OVERVIEW -->
+  <section id="services">
+    <div class="wrap">
+      <div class="section-head fade-in" data-fade>
+        <span class="eyebrow">What we test</span>
+        <h2>Eight ways we keep your product safe to sell.</h2>
+        <p>From farm to fork — and from tap to glass — every service below maps to a full accredited test panel further down the page.</p>
+      </div>
+      <div class="svc-grid">
+        <a class="svc-card fade-in" data-fade href="#panel-01">
+          <span class="svc-num">01 / 08</span>
+          <svg class="svc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><circle cx="6" cy="7" r="1.4"/><circle cx="18" cy="6" r="1"/><circle cx="17" cy="17" r="1.6"/></svg>
+          <h3>Microbiological &amp; chemical testing</h3>
+          <p>Pathogens, enumerations &amp; chemical contaminants across food &amp; feed.</p>
+          <span class="svc-go">View panel →</span>
+        </a>
+        <a class="svc-card fade-in" data-fade href="#panel-07">
+          <span class="svc-num">02 / 08</span>
+          <svg class="svc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3v4M9 6l3-3 3 3M5 13a7 7 0 1 0 14 0c0-4-7-10-7-10s-7 6-7 10z" fill="none"/></svg>
+          <h3>Shelf‑life &amp; stability studies</h3>
+          <p>Accelerated &amp; real‑time validation of product shelf life.</p>
+          <span class="svc-go">View panel →</span>
+        </a>
+        <a class="svc-card fade-in" data-fade href="#panel-01">
+          <span class="svc-num">03 / 08</span>
+          <svg class="svc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16v4H4zM4 16h10v4H4z"/><path d="M16 16h4v4h-4z"/></svg>
+          <h3>Sampling &amp; hygiene monitoring</h3>
+          <p>On‑site sampling, swabbing &amp; environmental hygiene checks.</p>
+          <span class="svc-go">View panel →</span>
+        </a>
+        <a class="svc-card fade-in" data-fade href="#panel-02">
+          <span class="svc-num">04 / 08</span>
+          <svg class="svc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2.5S5 11 5 15.5a7 7 0 0 0 14 0C19 11 12 2.5 12 2.5z"/></svg>
+          <h3>Comprehensive water testing</h3>
+          <p>Drinking, process &amp; environmental water — inorganic &amp; physical parameters.</p>
+          <span class="svc-go">View panel →</span>
+        </a>
+        <a class="svc-card fade-in" data-fade href="#panel-01">
+          <span class="svc-num">05 / 08</span>
+          <svg class="svc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2v6M9 4.5l3 3.5 3-3.5"/><circle cx="12" cy="15" r="7"/></svg>
+          <h3>Allergen &amp; contaminant screening</h3>
+          <p>Heavy metals, illegal colours &amp; mycotoxins detection.</p>
+          <span class="svc-go">View panel →</span>
+        </a>
+        <a class="svc-card fade-in" data-fade href="#panel-07">
+          <span class="svc-num">06 / 08</span>
+          <svg class="svc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 6h16M4 12h16M4 18h10"/></svg>
+          <h3>Nutritional analysis &amp; labeling</h3>
+          <p>Nutrition facts panels built to regional labelling regulation.</p>
+          <span class="svc-go">View panel →</span>
+        </a>
+        <a class="svc-card fade-in" data-fade href="#panel-03">
+          <span class="svc-num">07 / 08</span>
+          <svg class="svc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg>
+          <h3>Pesticide residue analysis</h3>
+          <p>Multi‑residue screening for food, feed &amp; agrochemical industries.</p>
+          <span class="svc-go">View panel →</span>
+        </a>
+        <a class="svc-card fade-in" data-fade href="#panel-04">
+          <span class="svc-num">08 / 08</span>
+          <svg class="svc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 21l1.5-9L4 8l6-1L12 2l2 5 6 1-4.5 4L17 21l-5-3-5 3z"/></svg>
+          <h3>Cannabis testing</h3>
+          <p>Pesticides, heavy metals, pathology &amp; microbiological quality.</p>
+          <span class="svc-go">View panel →</span>
+        </a>
+      </div>
+      <p style="margin-top:18px; font-size:13.5px;">Need something else? Our <a href="#panel-08" style="color:var(--teal-deep); font-weight:600; text-decoration:underline;">consultancy &amp; other testing</a> panel covers halal, cosmetics, honey, edible oil and environmental work too.</p>
+    </div>
+  </section>
+
+  <!-- PANELS -->
+  <section id="panels" style="background:var(--paper-2); border-top:1px solid var(--line);">
+    <div class="wrap">
+      <div class="section-head fade-in" data-fade>
+        <span class="eyebrow">Test panels 01–08</span>
+        <h2>Every panel, every parameter.</h2>
+        <p>Each panel below mirrors the scope on our accreditation schedule — browse by category, or jump straight to the parameters you need tested.</p>
+      </div>
+
+      <div class="panels-shell">
+        <nav class="rail" id="rail">
+          <a href="#" class="rail-tab active" data-target="panel-01"><b>01</b> Food &amp; Feed</a>
+          <a href="#" class="rail-tab" data-target="panel-02"><b>02</b> Water Analysis</a>
+          <a href="#" class="rail-tab" data-target="panel-03"><b>03</b> Pesticide Residues</a>
+          <a href="#" class="rail-tab" data-target="panel-04"><b>04</b> Medical Cannabis</a>
+          <a href="#" class="rail-tab" data-target="panel-05"><b>05</b> Halal Testing</a>
+          <a href="#" class="rail-tab" data-target="panel-06"><b>06</b> Cosmetics</a>
+          <a href="#" class="rail-tab" data-target="panel-07"><b>07</b> Shelf‑Life &amp; Labelling</a>
+          <a href="#" class="rail-tab" data-target="panel-08"><b>08</b> Other &amp; Consultancy</a>
+        </nav>
+
+        <div class="panels-content">
+          <!-- PANEL 01 -->
+          <article class="panel active" id="panel-01">
+            <div class="panel-head">
+              <span class="panel-id">PANEL 01</span>
+              <h3>Food &amp; Feed Analysis</h3>
+              
+            </div>
+            <p class="panel-scope">As a market leader, RBML offers an unrivalled range of food and drink testing services across food categories — ensuring products are free from microbiological contamination at every stage of the chain, from farm to fork.</p>
+            <div class="groups">
+              <div class="group">
+                <h4>Pathogen detection</h4>
+                <div class="chips">
+                  <span class="chip">Salmonella spp</span><span class="chip">Listeria spp</span><span class="chip">E. coli O157</span>
+                  <span class="chip">Campylobacter spp</span><span class="chip">Shigella spp</span><span class="chip">Vibrio spp</span>
+                </div>
+              </div>
+              <div class="group">
+                <h4>Typical enumerations</h4>
+                <div class="chips">
+                  <span class="chip">Bacillus cereus</span><span class="chip">Clostridium perfringens</span><span class="chip">Total coliforms</span>
+                  <span class="chip">E. coli</span><span class="chip">Enterobacteriaceae</span><span class="chip">Lactic acid bacteria</span>
+                  <span class="chip">Pseudomonas aeruginosa</span><span class="chip">Staphylococcus aureus</span>
+                  <span class="chip">Total viable count (TVC)</span><span class="chip">Yeast &amp; moulds</span>
+                </div>
+              </div>
+              <div class="group">
+                <h4>Heavy / toxic metals</h4>
+                <div class="chips">
+                  <span class="chip">Aluminium</span><span class="chip">Arsenic</span><span class="chip">Cadmium</span><span class="chip">Lead</span>
+                  <span class="chip">Mercury</span><span class="chip">Tin</span><span class="chip">Copper</span><span class="chip">Zinc</span><span class="chip">Iron</span>
+                </div>
+              </div>
+              <div class="group">
+                <h4>Illegal colours</h4>
+                <div class="chips">
+                  <span class="chip">Ponceau 4R (E124)</span><span class="chip">Allura Red AC (E129)</span><span class="chip">Rhodamine</span>
+                  <span class="chip">Sudan I–IV</span><span class="chip">Tartrazine (E102)</span><span class="chip">Azorubine (E122)</span>
+                </div>
+              </div>
+              <div class="group">
+                <h4>Mycotoxins</h4>
+                <div class="chips">
+                  <span class="chip">Aflatoxins B1/B2/G1/G2/M1</span><span class="chip">Deoxynivalenol</span><span class="chip">Ochratoxins</span>
+                  <span class="chip">Patulin</span><span class="chip">Zearalenone</span><span class="chip">Fumonisin</span><span class="chip">T‑2 / HT‑2 toxin</span><span class="chip">Melamine</span>
+                </div>
+              </div>
+              <div class="group">
+                <h4>Industries served</h4>
+                <div class="chips">
+                  <span class="chip">Dairy producers</span><span class="chip">Drinks manufacturers</span><span class="chip">Importers / exporters</span>
+                  <span class="chip">Food service</span><span class="chip">Retailers &amp; wholesalers</span><span class="chip">Hotels &amp; caterers</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- PANEL 02 -->
+          <article class="panel" id="panel-02">
+            <div class="panel-head">
+              <span class="panel-id">PANEL 02</span>
+              <h3>Water Analysis</h3>
+              
+            </div>
+            <p class="panel-scope">Our chemists test water for inorganic compounds across soil, sediment, water and air matrices, using methods aligned to LIBNOR Standard NL161 for drinking water, US EPA procedures, and local standards — giving you reliable data to guarantee safe drinking water.</p>
+            <div class="groups">
+              <div class="group">
+                <h4>Heavy metals &amp; minerals</h4>
+                <div class="chips">
+                  <span class="chip">Routine ICP‑OES</span><span class="chip">Trace ICP‑MS</span><span class="chip">High‑resolution ICP‑MS</span>
+                  <span class="chip">AAS/AFS hydride (As, Se, Sb)</span><span class="chip">Mercury (cold vapour)</span><span class="chip">Methyl mercury speciation</span>
+                </div>
+              </div>
+              <div class="group">
+                <h4>Other inorganics &amp; physical parameters</h4>
+                <div class="chips">
+                  <span class="chip">pH</span><span class="chip">Turbidity</span><span class="chip">Conductivity</span><span class="chip">Total hardness</span>
+                  <span class="chip">Alkalinity &amp; acidity</span><span class="chip">Free chlorine</span><span class="chip">Chloride / nitrate / nitrite</span>
+                  <span class="chip">Cyanide</span><span class="chip">Sulfide</span><span class="chip">BOD / COD</span><span class="chip">TDS / TSS (solids)</span>
+                  <span class="chip">Nutrients (N + P)</span><span class="chip">Salinity</span><span class="chip">Colour</span>
+                </div>
+              </div>
+              <div class="group">
+                <h4>Drinking water programme</h4>
+                <div class="chips">
+                  <span class="chip">Regulated compounds</span><span class="chip">Non‑regulated compounds of concern</span>
+                  <span class="chip">Volatile organic compounds</span><span class="chip">Municipal &amp; utility testing</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- PANEL 03 -->
+          <article class="panel" id="panel-03">
+            <div class="panel-head">
+              <span class="panel-id">PANEL 03</span>
+              <h3>Pesticide Residue Analysis</h3>
+              
+            </div>
+            <p class="panel-scope">Using the latest technology and dedicated facilities, RBML delivers fast, accurate, accredited pesticide residue analysis — supporting the food, animal feed and agrochemical industries with the product assurance the market demands.</p>
+            <div class="groups">
+              <div class="group">
+                <h4>Multi‑residue screening</h4>
+                <div class="chips">
+                  <span class="chip">Multi‑residue pesticide panel</span><span class="chip">Fruit &amp; vegetables</span>
+                  <span class="chip">Grains &amp; pulses</span><span class="chip">Processed foods</span><span class="chip">Animal feed</span>
+                </div>
+              </div>
+              <div class="group">
+                <h4>Why it matters</h4>
+                <div class="chips">
+                  <span class="chip">Retailer quality standards</span><span class="chip">Export compliance</span>
+                  <span class="chip">Traditional &amp; rapid methods</span><span class="chip">Tailored service packages</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- PANEL 04 -->
+          <article class="panel" id="panel-04">
+            <div class="panel-head">
+              <span class="panel-id">PANEL 04</span>
+              <h3>Medical Cannabis Testing</h3>
+              
+            </div>
+            <p class="panel-scope">RBML supports cannabis cultivators and processors with the same rigour applied across our food and water panels — covering residues, contaminants, plant health and microbiological quality. Full published parameter lists are being finalised; get in touch for current scope and pricing.</p>
+            <div class="groups">
+              <div class="group">
+                <h4>Coverage areas</h4>
+                <div class="chips">
+                  <span class="chip">Multi‑residue pesticides</span><span class="chip">Heavy metals</span>
+                  <span class="chip">Plant pathology (AHP)</span><span class="chip">Mycotoxin analysis</span>
+                  <span class="chip">Microbiological quality</span>
+                </div>
+              </div>
+              <div class="group">
+                <h4>Reference</h4>
+                <div class="chips">
+                  <span class="chip">American Herbal Pharmacopoeia</span><span class="chip">Cultivator &amp; processor support</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- PANEL 05 -->
+          <article class="panel" id="panel-05">
+            <div class="panel-head">
+              <span class="panel-id">PANEL 05</span>
+              <h3>Halal Testing</h3>
+              
+            </div>
+            <p class="panel-scope">Quality and compliance testing to support halal certification claims — verifying products and ingredients are free from prohibited substances and meet the standards your certifying body and customers expect.</p>
+            <div class="groups">
+              <div class="group">
+                <h4>Coverage</h4>
+                <div class="chips">
+                  <span class="chip">Species / DNA screening</span><span class="chip">Alcohol content verification</span>
+                  <span class="chip">Animal‑derived ingredient checks</span><span class="chip">Cross‑contamination screening</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- PANEL 06 -->
+          <article class="panel" id="panel-06">
+            <div class="panel-head">
+              <span class="panel-id">PANEL 06</span>
+              <h3>Cosmetics Testing</h3>
+              
+            </div>
+            <p class="panel-scope">Microbiological and contaminant testing for cosmetic and personal care formulations, helping manufacturers and importers meet safety and regulatory requirements before products reach the shelf.</p>
+            <div class="groups">
+              <div class="group">
+                <h4>Coverage</h4>
+                <div class="chips">
+                  <span class="chip">Microbiological quality</span><span class="chip">Preservative efficacy</span>
+                  <span class="chip">Heavy metals</span><span class="chip">Contaminant screening</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- PANEL 07 -->
+          <article class="panel" id="panel-07">
+            <div class="panel-head">
+              <span class="panel-id">PANEL 07</span>
+              <h3>Shelf‑Life &amp; Labelling</h3>
+              
+            </div>
+            <p class="panel-scope">From validating how long a product really stays safe and saleable, to building a nutrition facts panel that meets regional regulation — this is where formulation meets paperwork.</p>
+            <div class="groups">
+              <div class="group">
+                <h4>Shelf‑life &amp; stability</h4>
+                <div class="chips">
+                  <span class="chip">Accelerated shelf‑life validation</span><span class="chip">Real‑time stability studies</span>
+                  <span class="chip">Microbiological &amp; sensory endpoints</span>
+                </div>
+              </div>
+              <div class="group">
+                <h4>Labelling</h4>
+                <div class="chips">
+                  <span class="chip">Nutrition facts panels</span><span class="chip">Macro / micronutrient analysis</span>
+                  <span class="chip">Regulatory label review</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- PANEL 08 -->
+          <article class="panel" id="panel-08">
+            <div class="panel-head">
+              <span class="panel-id">PANEL 08</span>
+              <h3>Other Testing &amp; Consultancy</h3>
+              
+            </div>
+            <p class="panel-scope">Specialty matrices and advisory support that don't sit neatly in one box — honey authenticity, edible oil quality, environmental monitoring, and hands‑on consultancy to get your quality system audit‑ready.</p>
+            <div class="groups">
+              <div class="group">
+                <h4>Specialty matrices</h4>
+                <div class="chips">
+                  <span class="chip">Honey testing</span><span class="chip">Edible oil testing</span>
+                  <span class="chip">Environmental testing</span><span class="chip">Air quality monitoring</span>
+                </div>
+              </div>
+              <div class="group">
+                <h4>Consultancy services</h4>
+                <div class="chips">
+                  <span class="chip">Quality management systems</span><span class="chip">Audit preparation</span>
+                  <span class="chip">Sampling protocol design</span><span class="chip">Transport &amp; collection service</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <div class="stats">
+    <div class="wrap stats-grid">
+      <div class="fade-in" data-fade><b>17025</b><span>ISO/IEC standard, 2017 edition</span></div>
+      <div class="fade-in" data-fade><b>1st</b><span>Private lab of its kind in Lebanon</span></div>
+    </div>
+  </div>
+
+  <!-- ABOUT / ACCREDITATION -->
+  <section id="about" class="about-band">
+    <div class="wrap about-grid">
+      <div>
+        <span class="eyebrow">Our commitment</span>
+        <h2 class="fade-in" data-fade>First privately‑owned, ISO/IEC 17025‑accredited lab of its kind in Lebanon.</h2>
+        <p class="fade-in" data-fade style="margin-top:16px;">RBML is fully committed to a dynamic culture across its laboratories, delivering industry‑leading service to every customer. We help manage food safety and quality compliance across a wide range of industries and product categories — with integrity, and an industry‑leading quality management system at the core.</p>
+
+        <div class="accred-list fade-in" data-fade>
+          <div><b>ISO/IEC 17025:2017</b><span>Laboratory accreditation</span></div>
+          <div><b>CYSAB</b><span>L042‑3</span></div>
+          <div><b>ILAC‑MRA</b><span>Mutual recognition arrangement</span></div>
+          <div><b>GAFTA</b><span>Analyst member</span></div>
+        </div>
+      </div>
+
+      <div class="fade-in" data-fade>
+        <img src="https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?w=1200&q=90&fit=crop&crop=center" alt="Lab scientists at work" class="about-photo">
+        <div class="industries">
+        <div>
+          <h4>Industries we serve</h4>
+          <ul>
+            <li>Dairy producers</li>
+            <li>Drinks manufacturers (incl. water &amp; soft drinks)</li>
+            <li>Exporters &amp; importers</li>
+            <li>Food service operators</li>
+            <li>Independent &amp; primary producers</li>
+            <li>Retailers &amp; wholesalers</li>
+            <li>Hotels, restaurants &amp; caterers</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Product categories</h4>
+          <ul>
+            <li>Processed &amp; ready‑to‑eat foods</li>
+            <li>Dairy products</li>
+            <li>Beverages</li>
+            <li>Fruit &amp; vegetables</li>
+            <li>Meat, poultry &amp; seafood</li>
+            <li>Bakery items &amp; baby foods</li>
+            <li>Packaging materials</li>
+          </ul>
+        </div>
+        </div><!-- end .industries -->
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="wrap contact-grid">
+      <div>
+        <span class="eyebrow">Get in touch</span>
+        <h2 class="fade-in" data-fade style="margin:14px 0 18px;">Send a sample, or just ask a question.</h2>
+        <p class="fade-in" data-fade style="margin-bottom:30px;">Tell us what you're testing and we'll come back with the right panel, a turnaround estimate, and next steps for sampling or collection.</p>
+
+        <div class="contact-info">
+          <div class="ci-item">
+            <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2.5S5 11 5 15.5a7 7 0 0 0 14 0C19 11 12 2.5 12 2.5z"/></svg>
+            <div><h4>Address</h4><p>Choueifat, Lebanon — Old Saida Road, A. Khalek Bldg, 4th Floor</p></div>
+          </div>
+          <div class="ci-item">
+            <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg>
+            <div><h4>Phone</h4><a href="tel:+9615433149">+961 5 433149</a> · <a href="tel:+9613882989">+961 3 882989</a></div>
+          </div>
+          <div class="ci-item">
+            <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 6h18v12H3z"/><path d="M3 7l9 6 9-6"/></svg>
+            <div><h4>Email</h4><a href="mailto:ramikhodr@rbml-micro.com">ramikhodr@rbml-micro.com</a></div>
+          </div>
+        </div>
+      </div>
+
+      <form id="quoteForm" class="fade-in" data-fade>
+        <div class="form-row">
+          <div>
+            <label for="name">Full name</label>
+            <input id="name" name="name" type="text" placeholder="Jane Doe" required>
+          </div>
+          <div>
+            <label for="company">Company</label>
+            <input id="company" name="company" type="text" placeholder="Your company">
+          </div>
+        </div>
+        <div class="form-row">
+          <div>
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" placeholder="you@company.com" required>
+          </div>
+          <div>
+            <label for="panel">Panel of interest</label>
+            <select id="panel" name="panel">
+              <option>Food &amp; Feed Analysis</option>
+              <option>Water Analysis</option>
+              <option>Pesticide Residue Analysis</option>
+              <option>Medical Cannabis Testing</option>
+              <option>Halal Testing</option>
+              <option>Cosmetics Testing</option>
+              <option>Shelf‑Life &amp; Labelling</option>
+              <option>Other / Not sure yet</option>
+            </select>
+          </div>
+        </div>
+        <div>
+          <label for="message">What do you need tested?</label>
+          <textarea id="message" name="message" placeholder="Tell us about your product, volume, and timeline."></textarea>
+        </div>
+        <button type="submit" class="btn btn-solid" style="align-self:flex-start;">Send request</button>
+        <p id="formNote" style="font-size:12.5px; display:none;">Thanks — this is a demo form. Email us directly at <a href="mailto:ramikhodr@rbml-micro.com" style="color:var(--teal-deep); font-weight:600;">ramikhodr@rbml-micro.com</a> to reach the lab.</p>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<div class="mini-footer">
+  <div class="wrap" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+    <span>© RBML FOOD LABS — Choueifat, Lebanon · CYSAB L042‑3</span>
+    <a href="#contact" style="color:var(--teal); text-decoration:none; font-weight:600;">Get in touch ↑</a>
+  </div>
+</div>
+
+<script>
+  // Fade-in on scroll
+  const faders = document.querySelectorAll('[data-fade]');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  faders.forEach(f => io.observe(f));
+
+  // Panel tab switching
+  const railTabs = document.querySelectorAll('.rail-tab');
+  const panelEls = document.querySelectorAll('.panel');
+  railTabs.forEach(tab => {
+    tab.addEventListener('click', (e) => {
+      e.preventDefault();
+      const target = tab.dataset.target;
+      railTabs.forEach(t => t.classList.remove('active'));
+      panelEls.forEach(p => p.classList.remove('active'));
+      tab.classList.add('active');
+      const targetPanel = document.getElementById(target);
+      if (targetPanel) targetPanel.classList.add('active');
+    });
+  });
+
+  // Demo form
+  const form = document.getElementById('quoteForm');
+  const note = document.getElementById('formNote');
+  if (form) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      note.style.display = 'block';
+    });
+  }
+</script>
+
+</body>
+</html>
