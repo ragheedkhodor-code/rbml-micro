@@ -1014,7 +1014,11 @@
   }, { threshold: 0.12 });
   faders.forEach(f => io.observe(f));
 
-  function activatePanel(targetId, scroll = true) {
+  // Panel tab switching
+const railTabs = document.querySelectorAll('.rail-tab');
+const panelEls = document.querySelectorAll('.panel');
+
+function activatePanel(targetId, scroll = true) {
   const targetPanel = document.getElementById(targetId);
   if (!targetPanel) {
     console.warn('No panel found for id:', targetId);
@@ -1027,16 +1031,28 @@
 
   panelEls.forEach(p => p.classList.toggle('active', p.id === targetId));
 
-  // keep the active rail tab visible on mobile's horizontal scroll
-  const activeTab = document.querySelector('.rail-tab.active');
-  if (activeTab) {
-    activeTab.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
-  }
-
   if (scroll) {
     document.getElementById('panels').scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 }
+
+railTabs.forEach(tab => {
+  tab.addEventListener('click', (e) => {
+    e.preventDefault();
+    activatePanel(tab.dataset.target);
+  });
+});
+
+document.querySelectorAll('.svc-card').forEach(card => {
+  card.addEventListener('click', (e) => {
+    const href = card.getAttribute('href') || '';
+    if (href.charAt(0) === '#') {
+      e.preventDefault();
+      const targetId = href.substring(1).trim();
+      activatePanel(targetId);
+    }
+  });
+});
 
   // Demo form
   const form = document.getElementById('quoteForm');
