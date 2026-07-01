@@ -156,6 +156,14 @@
   @media (max-width:560px){.svc-grid{grid-template-columns:1fr;}}
   .svc-card{background:var(--paper); padding:28px 24px; text-decoration:none; color:var(--ink); display:flex; flex-direction:column; gap:14px; transition:background .2s ease;}
   .svc-card:hover{background:var(--teal-tint);}
+  .svc-cta{background:var(--ink); color:var(--paper);}
+  .svc-cta .svc-num{color:var(--gray-2);}
+  .svc-cta .svc-icon{color:#fff;}
+  .svc-cta h3{color:#fff;}
+  .svc-cta p{color:#BFDAD6;}
+  .svc-cta .svc-go{color:#E08080;}
+  .svc-cta:hover{background:var(--teal-deep); color:#fff;}
+  .svc-cta:hover p, .svc-cta:hover .svc-num{color:#FBE9E7;}
   .svc-num{font-family:var(--mono); font-size:11px; color:var(--gray-2); letter-spacing:.08em;}
   .svc-icon{width:30px; height:30px; color:var(--red);}
   .svc-card h3{font-size:16px; font-weight:600;}
@@ -459,8 +467,14 @@
           <p>Full nutrient, texture &amp; chemistry panel for growers &amp; agronomists.</p>
           <span class="svc-go">View panel →</span>
         </a>
+        <a class="svc-card svc-cta fade-in" data-fade href="#contact">
+          <span class="svc-num">Need something else?</span>
+          <svg class="svc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 5h16v11H8l-4 4z"/><path d="M8 10h8M8 13h5"/></svg>
+          <h3>Talk to us</h3>
+          <p>We test more than what's listed — from honey authenticity to environmental work. Tell us your product.</p>
+          <span class="svc-go">Get in touch →</span>
+        </a>
       </div>
-      <p style="margin-top:18px; font-size:13.5px;">Need something else? Our <a href="#panel-08" style="color:var(--teal-deep); font-weight:600; text-decoration:underline;">honey, sugars &amp; special matrices</a> panel covers honey authenticity, oils &amp; fats, cheese authenticity and environmental work too.</p>
     </div>
   </section>
 
