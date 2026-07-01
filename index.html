@@ -387,49 +387,49 @@
           <p>Pathogens, enumerations &amp; chemical contaminants across food &amp; feed.</p>
           <span class="svc-go">View panel →</span>
         </a>
-        <a class="svc-card fade-in" data-fade href="#panel-07">
+        <a class="svc-card fade-in" data-fade href="#panel-02">
           <span class="svc-num">02 / 11</span>
           <svg class="svc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3v4M9 6l3-3 3 3M5 13a7 7 0 1 0 14 0c0-4-7-10-7-10s-7 6-7 10z" fill="none"/></svg>
           <h3>Shelf‑life &amp; stability studies</h3>
           <p>Accelerated &amp; real‑time validation of product shelf life.</p>
           <span class="svc-go">View panel →</span>
         </a>
-        <a class="svc-card fade-in" data-fade href="#panel-01">
+        <a class="svc-card fade-in" data-fade href="#panel-03">
           <span class="svc-num">03 / 11</span>
           <svg class="svc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16v4H4zM4 16h10v4H4z"/><path d="M16 16h4v4h-4z"/></svg>
           <h3>Sampling &amp; hygiene monitoring</h3>
           <p>On‑site sampling, swabbing &amp; environmental hygiene checks.</p>
           <span class="svc-go">View panel →</span>
         </a>
-        <a class="svc-card fade-in" data-fade href="#panel-02">
+        <a class="svc-card fade-in" data-fade href="#panel-04">
           <span class="svc-num">04 / 11</span>
           <svg class="svc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2.5S5 11 5 15.5a7 7 0 0 0 14 0C19 11 12 2.5 12 2.5z"/></svg>
           <h3>Comprehensive water testing</h3>
           <p>Drinking, process &amp; environmental water — inorganic &amp; physical parameters.</p>
           <span class="svc-go">View panel →</span>
         </a>
-        <a class="svc-card fade-in" data-fade href="#panel-01">
+        <a class="svc-card fade-in" data-fade href="#panel-05">
           <span class="svc-num">05 / 11</span>
           <svg class="svc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2v6M9 4.5l3 3.5 3-3.5"/><circle cx="12" cy="15" r="7"/></svg>
           <h3>Allergen &amp; contaminant screening</h3>
           <p>Heavy metals, illegal colours &amp; mycotoxins detection.</p>
           <span class="svc-go">View panel →</span>
         </a>
-        <a class="svc-card fade-in" data-fade href="#panel-07">
+        <a class="svc-card fade-in" data-fade href="#panel-06">
           <span class="svc-num">06 / 11</span>
           <svg class="svc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 6h16M4 12h16M4 18h10"/></svg>
           <h3>Nutritional analysis &amp; labeling</h3>
           <p>Nutrition facts panels built to regional labelling regulation.</p>
           <span class="svc-go">View panel →</span>
         </a>
-        <a class="svc-card fade-in" data-fade href="#panel-03">
+        <a class="svc-card fade-in" data-fade href="#panel-07">
           <span class="svc-num">07 / 11</span>
           <svg class="svc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg>
           <h3>Pesticide residue analysis</h3>
           <p>Multi‑residue screening for food, feed &amp; agrochemical industries.</p>
           <span class="svc-go">View panel →</span>
         </a>
-        <a class="svc-card fade-in" data-fade href="#panel-04">
+        <a class="svc-card fade-in" data-fade href="#panel-08">
           <span class="svc-num">08 / 11</span>
           <svg class="svc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 21l1.5-9L4 8l6-1L12 2l2 5 6 1-4.5 4L17 21l-5-3-5 3z"/></svg>
           <h3>Cannabis testing</h3>
@@ -1014,20 +1014,29 @@
   }, { threshold: 0.12 });
   faders.forEach(f => io.observe(f));
 
-  // Panel tab switching
-  const railTabs = document.querySelectorAll('.rail-tab');
-  const panelEls = document.querySelectorAll('.panel');
-  railTabs.forEach(tab => {
-    tab.addEventListener('click', (e) => {
-      e.preventDefault();
-      const target = tab.dataset.target;
-      railTabs.forEach(t => t.classList.remove('active'));
-      panelEls.forEach(p => p.classList.remove('active'));
-      tab.classList.add('active');
-      const targetPanel = document.getElementById(target);
-      if (targetPanel) targetPanel.classList.add('active');
-    });
+  function activatePanel(targetId, scroll = true) {
+  const targetPanel = document.getElementById(targetId);
+  if (!targetPanel) {
+    console.warn('No panel found for id:', targetId);
+    return;
+  }
+
+  railTabs.forEach(t => {
+    t.classList.toggle('active', t.dataset.target === targetId);
   });
+
+  panelEls.forEach(p => p.classList.toggle('active', p.id === targetId));
+
+  // keep the active rail tab visible on mobile's horizontal scroll
+  const activeTab = document.querySelector('.rail-tab.active');
+  if (activeTab) {
+    activeTab.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+  }
+
+  if (scroll) {
+    document.getElementById('panels').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+}
 
   // Demo form
   const form = document.getElementById('quoteForm');
