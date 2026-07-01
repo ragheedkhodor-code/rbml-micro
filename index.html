@@ -189,7 +189,7 @@
 
   .groups{display:grid; grid-template-columns:repeat(2,1fr); gap:26px;}
   @media (max-width:700px){.groups{grid-template-columns:1fr;}}
-  .group h4{font-family:var(--mono); font-size:11.5px; text-transform:uppercase; letter-spacing:.07em; color:var(--red); margin-bottom:10px; font-weight:600;}
+  .group h4{font-family:var(--mono); font-size:11.5px; text-transform:uppercase; letter-spacing:.07em; color:var(--gray-2); margin-bottom:10px; font-weight:600;}
   .chips{display:flex; flex-wrap:wrap; gap:7px;}
   .chip{font-size:12.8px; border:1px solid var(--line); padding:6px 11px; border-radius:20px; color:var(--ink); background:var(--paper-2);}
 
@@ -387,49 +387,49 @@
           <p>Pathogens, enumerations &amp; chemical contaminants across food &amp; feed.</p>
           <span class="svc-go">View panel →</span>
         </a>
-        <a class="svc-card fade-in" data-fade href="#panel-02">
+        <a class="svc-card fade-in" data-fade href="#panel-07">
           <span class="svc-num">02 / 11</span>
           <svg class="svc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3v4M9 6l3-3 3 3M5 13a7 7 0 1 0 14 0c0-4-7-10-7-10s-7 6-7 10z" fill="none"/></svg>
           <h3>Shelf‑life &amp; stability studies</h3>
           <p>Accelerated &amp; real‑time validation of product shelf life.</p>
           <span class="svc-go">View panel →</span>
         </a>
-        <a class="svc-card fade-in" data-fade href="#panel-03">
+        <a class="svc-card fade-in" data-fade href="#panel-01">
           <span class="svc-num">03 / 11</span>
           <svg class="svc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16v4H4zM4 16h10v4H4z"/><path d="M16 16h4v4h-4z"/></svg>
           <h3>Sampling &amp; hygiene monitoring</h3>
           <p>On‑site sampling, swabbing &amp; environmental hygiene checks.</p>
           <span class="svc-go">View panel →</span>
         </a>
-        <a class="svc-card fade-in" data-fade href="#panel-04">
+        <a class="svc-card fade-in" data-fade href="#panel-02">
           <span class="svc-num">04 / 11</span>
           <svg class="svc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2.5S5 11 5 15.5a7 7 0 0 0 14 0C19 11 12 2.5 12 2.5z"/></svg>
           <h3>Comprehensive water testing</h3>
           <p>Drinking, process &amp; environmental water — inorganic &amp; physical parameters.</p>
           <span class="svc-go">View panel →</span>
         </a>
-        <a class="svc-card fade-in" data-fade href="#panel-05">
+        <a class="svc-card fade-in" data-fade href="#panel-01">
           <span class="svc-num">05 / 11</span>
           <svg class="svc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2v6M9 4.5l3 3.5 3-3.5"/><circle cx="12" cy="15" r="7"/></svg>
           <h3>Allergen &amp; contaminant screening</h3>
           <p>Heavy metals, illegal colours &amp; mycotoxins detection.</p>
           <span class="svc-go">View panel →</span>
         </a>
-        <a class="svc-card fade-in" data-fade href="#panel-06">
+        <a class="svc-card fade-in" data-fade href="#panel-07">
           <span class="svc-num">06 / 11</span>
           <svg class="svc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 6h16M4 12h16M4 18h10"/></svg>
           <h3>Nutritional analysis &amp; labeling</h3>
           <p>Nutrition facts panels built to regional labelling regulation.</p>
           <span class="svc-go">View panel →</span>
         </a>
-        <a class="svc-card fade-in" data-fade href="#panel-07">
+        <a class="svc-card fade-in" data-fade href="#panel-03">
           <span class="svc-num">07 / 11</span>
           <svg class="svc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg>
           <h3>Pesticide residue analysis</h3>
           <p>Multi‑residue screening for food, feed &amp; agrochemical industries.</p>
           <span class="svc-go">View panel →</span>
         </a>
-        <a class="svc-card fade-in" data-fade href="#panel-08">
+        <a class="svc-card fade-in" data-fade href="#panel-04">
           <span class="svc-num">08 / 11</span>
           <svg class="svc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 21l1.5-9L4 8l6-1L12 2l2 5 6 1-4.5 4L17 21l-5-3-5 3z"/></svg>
           <h3>Cannabis testing</h3>
@@ -1015,44 +1015,47 @@
   faders.forEach(f => io.observe(f));
 
   // Panel tab switching
-const railTabs = document.querySelectorAll('.rail-tab');
-const panelEls = document.querySelectorAll('.panel');
+  const railTabs = document.querySelectorAll('.rail-tab');
+  const panelEls = document.querySelectorAll('.panel');
 
-function activatePanel(targetId, scroll = true) {
-  const targetPanel = document.getElementById(targetId);
-  if (!targetPanel) {
-    console.warn('No panel found for id:', targetId);
-    return;
-  }
-
-  railTabs.forEach(t => {
-    t.classList.toggle('active', t.dataset.target === targetId);
-  });
-
-  panelEls.forEach(p => p.classList.toggle('active', p.id === targetId));
-
-  if (scroll) {
-    document.getElementById('panels').scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }
-}
-
-railTabs.forEach(tab => {
-  tab.addEventListener('click', (e) => {
-    e.preventDefault();
-    activatePanel(tab.dataset.target);
-  });
-});
-
-document.querySelectorAll('.svc-card').forEach(card => {
-  card.addEventListener('click', (e) => {
-    const href = card.getAttribute('href') || '';
-    if (href.charAt(0) === '#') {
-      e.preventDefault();
-      const targetId = href.substring(1).trim();
-      activatePanel(targetId);
+  function activatePanel(id, scroll) {
+    const targetPanel = document.getElementById(id);
+    if (!targetPanel) return;
+    railTabs.forEach(t => t.classList.toggle('active', t.dataset.target === id));
+    panelEls.forEach(p => p.classList.toggle('active', p.id === id));
+    if (scroll) {
+      const panelsSection = document.getElementById('panels');
+      if (panelsSection) panelsSection.scrollIntoView({ behavior: 'smooth' });
     }
+  }
+
+  // Rail tab clicks
+  railTabs.forEach(tab => {
+    tab.addEventListener('click', (e) => {
+      e.preventDefault();
+      activatePanel(tab.dataset.target, false);
+    });
   });
-});
+
+  // Overview "View panel →" cards: open the matching panel, then scroll to it
+  document.querySelectorAll('.svc-card').forEach(card => {
+    card.addEventListener('click', (e) => {
+      const href = card.getAttribute('href') || '';
+      if (href.startsWith('#panel-')) {
+        e.preventDefault();
+        activatePanel(href.slice(1), true);
+      }
+    });
+  });
+
+  // Open the right panel if the page is loaded with a #panel-XX hash
+  function openFromHash() {
+    if (location.hash.startsWith('#panel-')) {
+      activatePanel(location.hash.slice(1), true);
+    }
+  }
+  window.addEventListener('hashchange', openFromHash);
+  openFromHash();
 
   // Demo form
   const form = document.getElementById('quoteForm');
