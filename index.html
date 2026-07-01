@@ -1015,44 +1015,19 @@
   faders.forEach(f => io.observe(f));
 
   // Panel tab switching
-const railTabs = document.querySelectorAll('.rail-tab');
-const panelEls = document.querySelectorAll('.panel');
-
-function activatePanel(targetId, scroll = true) {
-  const targetPanel = document.getElementById(targetId);
-  if (!targetPanel) {
-    console.warn('No panel found for id:', targetId);
-    return;
-  }
-
-  railTabs.forEach(t => {
-    t.classList.toggle('active', t.dataset.target === targetId);
-  });
-
-  panelEls.forEach(p => p.classList.toggle('active', p.id === targetId));
-
-  if (scroll) {
-    document.getElementById('panels').scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }
-}
-
-railTabs.forEach(tab => {
-  tab.addEventListener('click', (e) => {
-    e.preventDefault();
-    activatePanel(tab.dataset.target);
-  });
-});
-
-document.querySelectorAll('.svc-card').forEach(card => {
-  card.addEventListener('click', (e) => {
-    const href = card.getAttribute('href') || '';
-    if (href.charAt(0) === '#') {
+  const railTabs = document.querySelectorAll('.rail-tab');
+  const panelEls = document.querySelectorAll('.panel');
+  railTabs.forEach(tab => {
+    tab.addEventListener('click', (e) => {
       e.preventDefault();
-      const targetId = href.substring(1).trim();
-      activatePanel(targetId);
-    }
+      const target = tab.dataset.target;
+      railTabs.forEach(t => t.classList.remove('active'));
+      panelEls.forEach(p => p.classList.remove('active'));
+      tab.classList.add('active');
+      const targetPanel = document.getElementById(target);
+      if (targetPanel) targetPanel.classList.add('active');
+    });
   });
-});
 
   // Demo form
   const form = document.getElementById('quoteForm');
