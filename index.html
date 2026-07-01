@@ -1016,18 +1016,38 @@
 
   // Panel tab switching
   const railTabs = document.querySelectorAll('.rail-tab');
-  const panelEls = document.querySelectorAll('.panel');
-  railTabs.forEach(tab => {
-    tab.addEventListener('click', (e) => {
-      e.preventDefault();
-      const target = tab.dataset.target;
-      railTabs.forEach(t => t.classList.remove('active'));
-      panelEls.forEach(p => p.classList.remove('active'));
-      tab.classList.add('active');
-      const targetPanel = document.getElementById(target);
-      if (targetPanel) targetPanel.classList.add('active');
-    });
+const panelEls = document.querySelectorAll('.panel');
+
+function activatePanel(target, scroll = true) {
+  const targetPanel = document.getElementById(target);
+  if (!targetPanel) return;
+
+  railTabs.forEach(t => t.classList.toggle('active', t.dataset.target === target));
+  panelEls.forEach(p => p.classList.remove('active'));
+  targetPanel.classList.add('active');
+
+  if (scroll) {
+    document.getElementById('panels').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+}
+
+railTabs.forEach(tab => {
+  tab.addEventListener('click', (e) => {
+    e.preventDefault();
+    activatePanel(tab.dataset.target);
   });
+});
+
+// Service cards -> jump to + activate matching panel
+document.querySelectorAll('.svc-card').forEach(card => {
+  card.addEventListener('click', (e) => {
+    const href = card.getAttribute('href') || '';
+    if (href.startsWith('#panel-')) {
+      e.preventDefault();
+      activatePanel(href.slice(1));
+    }
+  });
+});
 
   // Demo form
   const form = document.getElementById('quoteForm');
